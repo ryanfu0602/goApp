@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"goApp/model"
 	"goApp/services"
 	"net/http"
@@ -20,13 +21,13 @@ func GetArticleById(c echo.Context) error {
 }
 
 func AddArticle(c echo.Context) error {
-	article := new(model.ArticleUpdate)
+	article := new(model.ArticleAdd)
 	if err := c.Bind(article); err != nil {
 		return err
 	}
 	res := services.AddArticle(article)
-
-	return c.JSON(http.StatusCreated, res)
+	fmt.Println("error=", res.Error)
+	return c.JSON(http.StatusCreated, "OK")
 }
 
 func UpdateArticleById(c echo.Context) error {
