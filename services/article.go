@@ -1,18 +1,19 @@
 package services
 
 import (
-	"fmt"
 	"goApp/dao"
 	"goApp/model"
 	"strconv"
+
+	"gorm.io/gorm"
 )
 
-func GetArticleById(id int) string {
-	res := fmt.Sprintf("article id is %d", id)
+func GetArticleById(id int) *model.Article {
+	res := dao.GetArticleById(id)
 	return res
 }
 
-func AddArticle(article *model.ArticleUpdate) *model.ArticleUpdate {
+func AddArticle(article *model.ArticleAdd) *gorm.DB {
 	res := dao.AddArticle(article)
 	return res
 }
