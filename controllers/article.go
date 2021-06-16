@@ -21,10 +21,12 @@ func GetArticleById(c echo.Context) error {
 }
 
 func AddArticle(c echo.Context) error {
-	article := new(model.ArticleAdd)
+	article := new(model.Article)
+	println("a1=", article)
 	if err := c.Bind(article); err != nil {
 		return err
 	}
+
 	res := services.AddArticle(article)
 	fmt.Println("error=", res.Error)
 	return c.JSON(http.StatusCreated, "OK")

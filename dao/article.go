@@ -8,14 +8,9 @@ import (
 	"gorm.io/gorm"
 )
 
-func AddArticle(article *model.ArticleAdd) *gorm.DB {
+func AddArticle(article *model.Article) *gorm.DB {
 	db := utils.GetDB()
-
-	newArticle := new(model.Article)
-	newArticle.Title = article.Title
-	newArticle.Author = article.Author
-
-	result := db.Create(&newArticle)
+	result := db.Create(article)
 
 	return result
 }
@@ -26,4 +21,13 @@ func GetArticleById(id int) *model.Article {
 	db.Raw("SELECT * FROM article WHERE id = ?", id).Scan(&result)
 	fmt.Println(result)
 	return &result
+}
+
+func UpdateArticleById(id int, article *model.ArticleUpdate) string {
+	db := utils.GetDB()
+	fmt.Println(article.Title)
+	fmt.Println(article.Author)
+	reslut := db.Exec("UPDATE article SET title=?, author=? WHERE id = ?", article.Title, article.Author, id)
+	fmt.Println(reslut.RowsAffected)
+	return "ok"
 }

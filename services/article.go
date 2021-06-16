@@ -13,13 +13,14 @@ func GetArticleById(id int) *model.Article {
 	return res
 }
 
-func AddArticle(article *model.ArticleAdd) *gorm.DB {
+func AddArticle(article *model.Article) *gorm.DB {
 	res := dao.AddArticle(article)
 	return res
 }
 
 func UpdateArticleById(id int, article *model.ArticleUpdate) string {
-	res := "update id = " + strconv.Itoa(id)
+	// res := "update id = " + strconv.Itoa(id)
+	res := dao.UpdateArticleById(id, article)
 	return res
 }
 
