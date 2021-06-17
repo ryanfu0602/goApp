@@ -37,6 +37,7 @@ func main() {
 		// 	KeyFunc: getKey,
 		// }
 		// r.Use(middleware.JWTWithConfig(config))
+		r.GET("/articles", controllers.GetArticleList)
 		r.GET("/articles/:id", controllers.GetArticleById)
 		r.POST("/articles", controllers.AddArticle)
 		r.PUT("/articles/:id", controllers.UpdateArticleById)

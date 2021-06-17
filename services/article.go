@@ -1,9 +1,9 @@
 package services
 
 import (
+	"fmt"
 	"goApp/dao"
 	"goApp/model"
-	"strconv"
 
 	"gorm.io/gorm"
 )
@@ -18,13 +18,19 @@ func AddArticle(article *model.Article) *gorm.DB {
 	return res
 }
 
-func UpdateArticleById(id int, article *model.ArticleUpdate) string {
+func UpdateArticleById(id int, article *model.Article) string {
 	// res := "update id = " + strconv.Itoa(id)
 	res := dao.UpdateArticleById(id, article)
 	return res
 }
 
 func DeleteArticleById(id int) string {
-	res := "delete id = " + strconv.Itoa(id)
+	res := dao.DeleteArticleById(id)
+	fmt.Println("res=", res)
+	return res
+}
+
+func GetArticleList(title string, author string, country string, name string, age string, status string) *[]model.Article {
+	res := dao.GetArticle(title, author, country, name, age, status)
 	return res
 }
